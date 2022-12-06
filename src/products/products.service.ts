@@ -15,7 +15,7 @@ export class ProductsService {
     async getOne(id:number): Promise<Product> {
         return await this.prismaService.product.findUnique({
             where:{
-                id:id
+                id:+id
             }
         })
     }
@@ -23,7 +23,7 @@ export class ProductsService {
     async remove(id:number):Promise<Product> {
         return await this.prismaService.product.delete({
             where:{
-                id:id
+                id:+id
             }
         }) 
     }
@@ -31,16 +31,16 @@ export class ProductsService {
     async update(id:number,updateproductdto:updateProductDto):Promise<Product>{
         const check = await this.prismaService.product.findUnique({
             where:{
-                id:id
+                id:+id
             }
         })
         if(!check) throw new HttpException(
             "Invalid id ",
             HttpStatus.NOT_FOUND
-        )
-        return await this.prismaService.product.update({
+            )
+        return this.prismaService.product.update({
             where:{
-                id:id
+                id:+id
             },
             data:{
                 product_model:updateproductdto.product_model || check.product_model,
@@ -62,5 +62,14 @@ export class ProductsService {
                 subcategory_id:createProductdto.subcategory_id
             }
         })
+    }
+
+    async getProductByQuery(data:object,newId:number){
+          return this.prismaService.product.findUnique({
+            where:{
+                id:newId
+            }
+        })
+        
     }
 }

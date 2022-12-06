@@ -37,6 +37,8 @@ model Product {
   id Int @id @default(autoincrement())
   product_model String
   product_name String
+  color String
+  price Int
   subcategory_id Int?
 
   subCategory SubCategory? @relation(fields: [subcategory_id],references: [id])

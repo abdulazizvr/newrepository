@@ -10,7 +10,7 @@ export class PrismaService extends PrismaClient implements OnModuleInit,OnModule
         super({
             datasources:{
                 db:{
-                    url:'postgresql://postgres:checkhack__01@localhost:5432/nest-prisma?schema=public'
+                    url:'postgresql://postgres:checkhack__01@localhost:5432/online-store?schema=public'
                 }
             }
         })
